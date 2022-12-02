@@ -1,5 +1,12 @@
-import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
 import { useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  Button,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 
 import { auth } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -8,6 +15,7 @@ import AreaLogada from "./AreaLogada";
 const Cadastro = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const cadastrar = () => {
     if (!email || !senha) {
@@ -15,20 +23,24 @@ const Cadastro = ({ navigation }) => {
       return;
     }
 
+    setLoading(true);
+
     createUserWithEmailAndPassword(auth, email, senha)
       .then(() => {
         Alert.alert("Conta criada com sucesso!", "Deseja entrar?", [
           {
             text: "Não, me deixe aqui mesmo",
             onPress: () => {
-              return false;
+              navigation.replace("Inicial");
             },
+            style: "cancel",
           },
           {
             text: "Sim, leve-me a princesa",
             onPress: () => {
-              navigation.navigate(AreaLogada);
+              navigation.navigate("AreaLogada");
             },
+            style: "default",
           },
         ]);
       })
@@ -50,7 +62,8 @@ const Cadastro = ({ navigation }) => {
             break;
         }
         Alert.alert("Atenção!", mensagem);
-      });
+      })
+      .finally(() => setLoading(false));
   };
   return (
     <View style={estilos.container}>
@@ -68,7 +81,13 @@ const Cadastro = ({ navigation }) => {
           onChangeText={(valor) => setSenha(valor)}
         />
         <View style={estilos.botoes}>
-          <Button onPress={cadastrar} title="Cadastre-se" color="blue" />
+          <Button
+            disabled={loading}
+            onPress={cadastrar}
+            title="Cadastre-se"
+            color="blue"
+          />
+          {loading && <ActivityIndicator size="large" color="blue" />}
         </View>
       </View>
     </View>
