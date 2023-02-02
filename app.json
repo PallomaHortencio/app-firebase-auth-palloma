@@ -12,9 +12,12 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/a978bb11-1c69-4c27-8b54-0499faef63dc"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -32,6 +35,9 @@
         "projectId": "a978bb11-1c69-4c27-8b54-0499faef63dc"
       }
     },
-    "owner": "palloma2001"
+    "owner": "palloma2001",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }
