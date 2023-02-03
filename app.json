@@ -15,9 +15,12 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/a978bb11-1c69-4c27-8b54-0499faef63dc"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.palloma2001.appauth"
     },
     "android": {
       "adaptiveIcon": {
